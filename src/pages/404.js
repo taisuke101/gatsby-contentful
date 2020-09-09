@@ -3,11 +3,16 @@ import { Link } from 'gatsby';
 import styled from 'styled-components';
 
 import Layout from '../components/layout';
+import SEO from '../components/seo';
 
 
-const Error = () => {
+const Error = ({ location }) => {
     return (
         <Layout>
+            <SEO 
+                title='ページが見つかりません'
+                pagepath={location.pathname}
+            />
             <ErrorPage>
                 <h1>お探しのページは見つかりませんでした</h1>
                 <Link to={`/`}>Homeに戻る</Link>
