@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 
 import Layout from '../components/layout';
+import SEO from '../components/seo'
 
 
 export const query = graphql`
@@ -57,6 +58,7 @@ const Index = ({ data }) => {
   return (
     <div>
       <Layout>
+        <SEO title='ホームページ'/>
         <section className="hero">
           <figure>
             <Img
