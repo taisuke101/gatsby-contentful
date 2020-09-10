@@ -24,6 +24,7 @@ const SEO = ({
     description, 
     pagePath, 
     pageImg, 
+    blogImg,
     pageImgw, 
     pageImgh }) => {
     const {site} = useStaticQuery(query)
@@ -36,7 +37,7 @@ const SEO = ({
     } = site.siteMetadata
 
     const url = pagePath ? `${siteUrl}${pagePath}` : `${siteUrl}`
-    const imgUrl = pageImg ? `${siteUrl}${pageImg}` : `${siteUrl}/thumb.jpg`
+    const imgUrl = pageImg ? `${siteUrl}${pageImg}` : blogImg || `${siteUrl}/thumb.jpg`
     const imgWidth = pageImgw || 1280
     const imgHeight = pageImgh || 640
 
@@ -53,9 +54,6 @@ const SEO = ({
             <meta property='og:image:height' content={imgHeight} />
             <meta name='twitter:card' content='summary_large_image' />
             <meta name='twitter:creator' content={twitterUsername} />
-            <meta name='twitter:title' content={siteTitle} />
-            <meta name='twitter:description' content={siteDesc} />
-            <meta name='twitter:image' content={url} />
         </Helmet>
     )
 }

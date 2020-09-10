@@ -1,9 +1,10 @@
 import React from 'react'
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 
 import Layout from '../components/layout';
 import useContentfulImage from '../utils/useContentfulImage'
+import SEO from '../components/seo';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faFolderOpen } from '@fortawesome/free-regular-svg-icons';
@@ -11,11 +12,12 @@ import { faChevronLeft, faChevronRight, faCheckSquare } from '@fortawesome/free-
 
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
+import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
 
 
 export const query = graphql`
-    {
-        contentfulBlogPost {
+    query ($id: String!){
+        contentfulBlogPost (id: {eq: $id}){
             title
             publishDateJP: publishDate(formatString: "YYYY年MM月DD日")
             publishDate
@@ -24,6 +26,15 @@ export const query = graphql`
                     ...GatsbyContentfulFluid_withWebp
                 }
                 description
+                file {
+                    details {
+                        image {
+                            width
+                            height
+                        }
+                    }
+                url
+                }
             }
             content {
                 json
@@ -62,7 +73,7 @@ const options = {
     }
 }
 
-const BlogPost = ({data: {contentfulBlogPost, contentfulCategory}}) => {
+const BlogPost = ({data: {contentfulBlogPost, contentfulCategory}, pageContext, location}) => {
     const {
         title,
         publishDate,
@@ -78,6 +89,15 @@ const BlogPost = ({data: {contentfulBlogPost, contentfulCategory}}) => {
 
     return (
         <Layout>
+            <SEO 
+                title={title}
+                description={`${documentToPlainTextString(
+                    content.json).slice(0, 70)}...`}
+                pagePath={location.pathname}
+                blogImg={`https:${eyecatch.file.url}`}
+                pageImgw={eyecatch.file.details.image.width}
+                pageImgh={eyecatch.file.details.image.height}
+            />
             <div className="eyecatch">
                 <figure>
                     <Img fluid={eyecatch.fluid} alt={eyecatch.description} />
@@ -104,18 +124,22 @@ const BlogPost = ({data: {contentfulBlogPost, contentfulCategory}}) => {
                         {documentToReactComponents(content.json, options)}
                     </div>
                     <ul className="postlink">
+                    { pageContext.previous &&  (
                         <li className="prev">
-                            <a href="base-blogpost.html" rel="prev">
+                            <Link to={`/blog/post/${pageContext.previous.slug}/`} rel="prev">
                                 <FontAwesomeIcon icon={faChevronLeft} />
-                                <span>前の記事</span>
-                            </a>
+                                <span>{ pageContext.previous.title }</span>
+                            </Link>
                         </li>
+                    )}
+                    { pageContext.next && (  
                         <li className="next">
-                            <a href="base-blogpost.html" rel="next">
-                                <span>次の記事</span>
+                            <Link to={`/blog/post/${pageContext.next.slug}`} rel="next">
+                                <span>{ pageContext.next.title }</span>
                                 <FontAwesomeIcon icon={faChevronRight} />
-                            </a>
+                            </Link>
                         </li>
+                    )}
                     </ul>
                 </div>
             </article>
