@@ -21,6 +21,10 @@ export const query = graphql`
             title
             publishDateJP: publishDate(formatString: "YYYY年MM月DD日")
             publishDate
+            category {
+                category
+                categorySlug
+            }
             eyecatch {
                 fluid(maxWidth: 1600) {
                     ...GatsbyContentfulFluid_withWebp
@@ -39,10 +43,6 @@ export const query = graphql`
             content {
                 json
             }
-        }
-        contentfulCategory {
-            category
-            categorySlug
         }
     }
 `
@@ -73,19 +73,15 @@ const options = {
     }
 }
 
-const BlogPost = ({data: {contentfulBlogPost, contentfulCategory}, pageContext, location}) => {
+const BlogPost = ({data: {contentfulBlogPost}, pageContext, location}) => {
     const {
         title,
         publishDate,
         publishDateJP,
-        eyecatch,
-        content
-    } = contentfulBlogPost
-
-    const {
         category,
-        categorySlug
-    } = contentfulCategory
+        eyecatch,
+        content,
+    } = contentfulBlogPost
 
     return (
         <Layout>
@@ -113,12 +109,15 @@ const BlogPost = ({data: {contentfulBlogPost, contentfulCategory}, pageContext, 
                         </time>
                         <div className="cat">
                             <FontAwesomeIcon icon={faFolderOpen} />
+                            <ul>
+                            {category.map(cat => (
+                                <li className={cat.categorySlug} key={cat.id}>
+                                <Link to={`/cat/${cat.categorySlug}/`}>{cat.category}</Link>
+                                </li>
+                            ))}
+                            </ul>
                         </div>
-                        <ul>
-                            <li className={categorySlug}>
-                            {category}
-                            </li>
-                        </ul>
+                        
                     </aside>
                     <div className="postbody">
                         {documentToReactComponents(content.json, options)}
