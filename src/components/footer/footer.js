@@ -3,7 +3,9 @@ import { Link } from 'gatsby';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 
-import SocialLinks from '../constants/socialLinks';
+import SocialLinks from '../../constants/socialLinks';
+
+import { FooterStyle, Container,Site, Back} from './footer.styles';
 
 const Footer = () => {
     const data = useStaticQuery(graphql`
@@ -19,9 +21,9 @@ const Footer = () => {
     `)
     return (
         <div>
-            <footer className="footer">
-                <div className="container">
-                    <div className="site">
+            <FooterStyle >
+                <Container>
+                    <Site>
                         <Link to={`/`}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -36,17 +38,17 @@ const Footer = () => {
                                 /></svg>
                             <p>おいしい食材と食事を探求するサイト</p>
                         </Link>
-                    </div>
+                    </Site>
                     <SocialLinks />
-                </div>
-                <div className='back'>
+                </Container>
+                <Back>
                     <Img
                         fluid={data.pattern.childImageSharp.fluid}
                         alt=''
                         style={{ height: '100%' }}
                     />
-                </div>
-            </footer>
+                </Back>
+            </FooterStyle>
         </div>
     )
 }

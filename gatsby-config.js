@@ -29,6 +29,16 @@ module.exports = {
         path: `${__dirname}/src/images/`,
       }
     },
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Caveat`
+          },
+        ]
+      }
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-manifest`,
@@ -36,7 +46,6 @@ module.exports = {
         name: `ESSENTIAL エッセンシャルズ`,
         short_name: `ESSENTIALS`,
         start_url: `/`,
-        background_color: `#ffffff`,
         theme_color: `#477294`,
         display: `srandalone`,
         icon: `src/images/icon.png`
