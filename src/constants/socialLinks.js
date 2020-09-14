@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -41,8 +42,19 @@ const links = data.map( link => {
 
 export default () => {
     return (
-        <ul className='sns'>
+        <SNS>
         {links}
-        </ul>
+        </SNS>
     )
 }
+
+const SNS = styled.ul`
+	display: flex;
+	list-style: none;
+	font-size: 40px;
+
+    li:not(:last-child) {
+        margin-right: 30px;
+    }
+
+`
