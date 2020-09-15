@@ -69,6 +69,8 @@ svg {
 	padding-bottom: 16px;
 	position: relative;
 	text-align: center;
+	font-family: 'Caveat', cursive;
+	font-size: 50px;
 }
 .bar::before,
 .bar::after {

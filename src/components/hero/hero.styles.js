@@ -37,28 +37,28 @@ export const Catch = styled.div`
     text-shadow: 0 0 20px rgba(0,0,0,0.5);
     
     h1 {
-        font-size: 20px;
+        font-size: 50px;
         margin-bottom: 10px;
         font-family: 'Caveat', cursive;
     }
 
     p {
-        font-size: 10px;
+        font-size: 15px;
     }
 
     @media (min-width: 768px) {
         h1 {
-            font-size: 40px;
+            font-size: 70px;
             margin-bottom: 30px;
         }
         p {
-            font-size: 16px;
+            font-size: 21px;
         }
     }
 
     @media (min-width: 900px) {
         h1 {
-            font-size: 56px;
+            font-size: 90px;
             margin-bottom: 30px;
         }
         p {
