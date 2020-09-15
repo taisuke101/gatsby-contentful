@@ -48,7 +48,7 @@ const Index = ({ data, location }) => {
     </div>
     <article className="content">
       <div className="container">
-        <h1 className="bar">ESSENTIALSについて</h1>
+        <h2 className="bar">About ESSENTIALS</h2>
         <aside className="info">
           <div className="subtitle">
             <FontAwesomeIcon icon={faUtensils} />

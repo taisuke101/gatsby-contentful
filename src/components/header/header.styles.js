@@ -61,9 +61,13 @@ export const Navigation = styled.div`
         margin-top: 18px;
         color: #477294;
     }
+    li {
+        font-size: 30px;
+        font-family: 'Caveat', cursive;
+    }
 
     li:not(:last-child) {
-	    margin-right: 55px;
+        margin-right: 55px;
     }   
 
     @media (min-width: 768px) {

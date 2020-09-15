@@ -2,14 +2,16 @@ import React from 'react'
 
 import FoodDetails from '../../constants/foodDetails/foodDetails';
 
+import {FoodStyles, Container, Bar} from './food.styles';
+
 const Food = () => {
     return (
-        <section className="food">
-            <div className="container">
-                <h2 className="bar">Food Essence</h2>
+        <FoodStyles>
+            <Container>
+                <Bar>Food Essence</Bar>
                 <FoodDetails />
-            </div>
-        </section>
+            </Container>
+        </FoodStyles>
     )
 }
 

@@ -42,7 +42,7 @@ const Blog = ({ data, location, pageContext }) => {
             />
             <section className="content bloglist">
                 <div className="container">
-                    <h1 className="bar">RECENT POSTS</h1>
+                    <h2 className="bar">RECENT POSTS</h2>
                     <div className="posts">
                         {data.allContentfulBlogPost.edges.map(({ node }) => (
                             <article className="post" key={node.id}>
